@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css %}
+<!-- plugin css -->
+<link href="{% static 'libs/jquery-vectormap/jquery-jvectormap-1.2.2.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            {% include "base_page_title.html" %}
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="card-box">
+                        <h4 class="header-title mb-3">Definition of Terminologi</h4>
+                        <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut exercitationem temporibus optio eveniet quasi vero a sapiente minus non id nemo qui sequi asperiores repellat excepturi doloribus vel, nobis consectetur tenetur quo. Possimus corrupti fugiat suscipit ipsam, asperiores vitae deserunt, vero temporibus saepe hic, sapiente quasi magnam. Assumenda, iusto quibusdam!</p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card-box">
+                        <h4 class="header-title mb-3">Objective & Limitation</h4>
+                        <ul class="mb-0">
+                            <li>Lorem ipsum dolor sit amet.</li>
+                            <li>Lorem ipsum dolor sit amet.</li>
+                            <li>Lorem ipsum dolor sit amet.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-xl-4">
+                    <div class="card-box">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="avatar-sm bg-blue rounded">
+                                    <i class="fe-user avatar-title font-22 text-white"></i>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-right">
+                                    <h3 class="my-1"><span data-plugin="counterup">10</span></h3>
+                                    <p class="text-muted mb-1 text-truncate">Number of User</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end card-box-->
+                </div> <!-- end col -->
+                
+                <div class="col-md-6 col-xl-4">
+                    <div class="card-box">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="avatar-sm bg-success rounded">
+                                    <i class="fe-globe avatar-title font-22 text-white"></i>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-right">
+                                    <h3 class="my-1"><span data-plugin="counterup">10</span></h3>
+                                    <p class="text-muted mb-1 text-truncate">Number of Department</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end card-box-->
+                </div> <!-- end col -->
+
+                <div class="col-md-6 col-xl-4">
+                    <div class="card-box">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="avatar-sm bg-warning rounded">
+                                    <i class="fe-users avatar-title font-22 text-white"></i>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-right">
+                                    <h3 class="my-1"><span data-plugin="counterup">10</span></h3>
+                                    <p class="text-muted mb-1 text-truncate">Number of Division</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end card-box-->
+                </div> <!-- end col -->
+
+            </div>
+            <!-- end row -->
+            <div class="page-title-box">
+                <h4 class="page-title">User Activity</h4>
+            </div>
+
+            <div class="row">
+                
+                <div class="col-xl-12">
+                    <div class="card" style="height: 400px;">
+                        <div class="card-body">
+                            <div class="card-widgets">
+                                <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                            </div>
+                            <h4 class="header-title mb-0">Top 5 User</h4>
+
+                            <div id="cardCollpase5" class="collapse pt-3 show">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-centered mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Department</th>
+                                                <th>Division</th>
+                                                <th>Points</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {% for user in user_list %}
+                                            <tr>
+                                                <td class="text-truncate">{{ user.name }}</td>
+                                                <td class="text-truncate">{{ user.department }}</td>
+                                                <td class="text-truncate">{{ user.division }}</td>
+                                                <td class="text-truncate">{{ user.points }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div> <!-- end table responsive-->
+                            </div> <!-- collapsed end -->
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card-->
+                </div> <!-- end col -->
+            </div>
+
+
+        </div> <!-- container -->
+
+    </div> <!-- content -->
+
+    {% include "base_footer.html" %}
+
+</div>
+
+<!-- ============================================================== -->
+<!-- End Page content -->
+<!-- ============================================================== -->
+
+{% endblock %}
+{% block js %}
+
+
+<script>
+    
+    var yValues = [
+        '{{ daily_list.0.points }}',
+        '{{ daily_list.1.points }}',
+        '{{ daily_list.2.points }}',
+        '{{ daily_list.3.points }}',
+        '{{ daily_list.4.points }}',
+        '{{ daily_list.5.points }}',
+        '{{ daily_list.6.points }}',
+    ];
+    var xValues = [
+        '{{ daily_list.0.pub_date }}',
+        '{{ daily_list.1.pub_date }}',
+        '{{ daily_list.2.pub_date }}',
+        '{{ daily_list.3.pub_date }}',
+        '{{ daily_list.4.pub_date }}',
+        '{{ daily_list.5.pub_date }}',
+        '{{ daily_list.6.pub_date }}'
+    ];
+
+    new Chart("myChart", {
+    type: "line",
+    data: {
+        labels: xValues,
+        datasets: [{
+        borderColor: '#4a81d4',
+        data: yValues,
+        }]
+    },
+    options:{
+        responsive: true,
+        fontColor: 'rgba(255, 255, 255, 0.8)',
+        legend: {display: false},
+        scales: {
+            xAxes: [{
+                scaleLabel: {
+                    display: false,
+                    labelString: 'X axis',
+                    fontColor: '#8a8a8a'
+                },
+                gridLines: {
+                    color: '#8a8a8a'
+                },
+                ticks: {
+                  fontColor: "#8a8a8a", // this here
+                },
+            }],
+            yAxes: [{
+                
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Points',
+                    fontColor: '#8a8a8a'
+                },
+                gridLines: {
+                    color: '#8a8a8a'
+                },
+                ticks: {
+                  fontColor: "#8a8a8a", // this here
+                },
+            }],
+        }
+    }
+    });
+    
+</script>
+
+<!-- Plugins js-->
+<script src="{% static 'libs/jquery-sparkline/jquery.sparkline.min.js' %}"></script>
+<script src="{% static 'libs/jquery-vectormap/jquery-jvectormap-1.2.2.min.js' %}"></script>
+<script src="{% static 'libs/jquery-vectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
+
+<!-- Dashboard 2 init -->
+<script src="{% static 'js/pages/dashboard-2.init.js' %}"></script>
+
+{% endblock %}
